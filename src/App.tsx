@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Product} from "./components/Product";
 import axios from "axios";
+import {IProduct} from "./models";
+
 
 function App() {
-
+  const [products, setProducts] = useState<IProduct[]>([])
 
   async function getProducts() {
     const res = await axios.get('https://fakestoreapi.com/products')
-    console.log(res.data)
+    setProducts(res.data)
   }
 
   useEffect(() => {
@@ -17,7 +19,7 @@ function App() {
 
   return (
     <div className="container mx-auto max-w-2xl pt-5">
-    <Product />
+      {products.map((product) => <Product product={product} key={product.id}/>)}
     </div>
   );
 }
