@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import './App.css'
 import { Product } from './components/Product'
 import { Loader } from './components/Loader'
@@ -7,13 +7,14 @@ import { useProducts } from './hooks/useProducts'
 import { Modal } from './components/Modal'
 import { CreateProduct } from './components/CreateProduct'
 import { IProduct } from './models'
+import { ModalContext } from './context/ModalContext'
 
 function App() {
   const { products, loading, error, addProduct } = useProducts()
-  const [modal, setModal] = useState(true)
+  const { modal, openModal, closeModal } = useContext(ModalContext)
 
   const createHandler = (product: IProduct) => {
-    setModal(false)
+    closeModal()
     addProduct(product)
   }
 
@@ -25,14 +26,14 @@ function App() {
         <Product product={product} key={product.id} />
       ))}
       {modal && (
-        <Modal title='Create new product' onClose={() => setModal(false)}>
+        <Modal title='Create new product' onClose={closeModal}>
           <CreateProduct onCreate={createHandler} />
         </Modal>
       )}
 
       <button
         className='border py-2 px-4 bg-yellow-400 hover:text-white fixed right-5 bottom-5 rounded text-2xl'
-        onClick={() => setModal(true)}>
+        onClick={openModal}>
         +
       </button>
     </div>
