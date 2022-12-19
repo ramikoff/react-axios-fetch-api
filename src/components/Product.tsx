@@ -22,7 +22,7 @@ export const Product = ({ product }: ProductProps) => {
         }}
         showInfo={showInfo}
       />
-      {showInfo && <Description info={product.description} rate={product.rating.count} />}
+      {showInfo && <Description info={product.description} rate={product?.rating?.count} />}
     </div>
   )
 }

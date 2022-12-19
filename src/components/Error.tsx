@@ -3,5 +3,5 @@ interface ErrorProps {
 }
 
 export const Error = ({ errorMessage }: ErrorProps) => {
-  return <div>{errorMessage}</div>
+  return <div className='text-red-600 text-center'>{errorMessage}</div>
 }
