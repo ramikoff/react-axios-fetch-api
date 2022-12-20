@@ -18,7 +18,7 @@ function ProductsPage() {
   }
 
   return (
-    <div className='container mx-auto max-w-2xl pt-5'>
+    <div className='container mx-auto max-w-2xl pt-20'>
       {loading && <Loader />}
       {error && <Error errorMessage={error} />}
       {products.map(product => (
